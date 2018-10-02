@@ -13,7 +13,8 @@ import org.springframework.stereotype.Service;
 @Service
 public class ConsumerDemoService {
 
-    @Reference(version = "1.0.0",url="dubbo://192.168.0.101:12345")
+//    @Reference(version = "1.0.0",url="dubbo://192.168.0.101:12345")
+    @Reference(version = "1.0.0")
     private DemoService demoService;
 
     @Autowired
