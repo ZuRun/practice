@@ -13,6 +13,8 @@
         <module>dubbo-test</module>
         <module>common-mongo</module>
         <module>mongo-test</module>
+        <module>log-test</module>
+        <module>kafka-learning</module>
     </modules>
 
 
