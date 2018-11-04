@@ -17,10 +17,20 @@ public class ConsumerExceptionDemoService {
     public String projectRuntimeException() {
         return exceptionDemoService.projectRuntimeException();
     }
+
+    public String dubboProviderException() {
+        return exceptionDemoService.dubboProviderException();
+    }
+
     public String exception() throws Exception {
         return exceptionDemoService.exception();
     }
+
     public String runtimeException() {
         return exceptionDemoService.runtimeException();
+    }
+
+    public String customException() {
+        return exceptionDemoService.customException();
     }
 }

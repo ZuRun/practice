@@ -19,12 +19,24 @@ public class ExceptionController {
     public String projectRuntimeException() {
         return exceptionDemoService.projectRuntimeException();
     }
+
+    @RequestMapping("dubboProviderException")
+    public String dubboProviderException() {
+        return exceptionDemoService.dubboProviderException();
+    }
+
     @RequestMapping("exception")
     public String exception() throws Exception {
         return exceptionDemoService.exception();
     }
+
     @RequestMapping("runtimeException")
     public String runtimeException() {
         return exceptionDemoService.runtimeException();
+    }
+
+    @RequestMapping("customException")
+    public String customException() {
+        return exceptionDemoService.customException();
     }
 }

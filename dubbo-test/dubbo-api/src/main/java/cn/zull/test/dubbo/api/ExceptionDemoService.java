@@ -6,6 +6,12 @@ package cn.zull.test.dubbo.api;
  */
 public interface ExceptionDemoService {
     String projectRuntimeException();
+
+    String dubboProviderException();
+
     String exception() throws Exception;
+
+    String customException();
+
     String runtimeException();
 }

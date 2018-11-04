@@ -15,6 +15,9 @@ import cn.zull.practice.common.basis.constants.IMessage;
  */
 public class BusinessException extends ProjectRuntimeException {
 
+    public BusinessException(ProjectRuntimeException cause) {
+        super(cause);
+    }
 
     public BusinessException(String errMsg) {
         super(ErrorCode.common.DEFAULT_BUSINESS_EXCEPTION_CODE, errMsg);

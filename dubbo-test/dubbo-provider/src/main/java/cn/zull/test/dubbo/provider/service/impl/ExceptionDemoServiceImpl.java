@@ -4,6 +4,8 @@ import cn.zull.practice.common.basis.exception.AssertException;
 import cn.zull.test.dubbo.api.ExceptionDemoService;
 import cn.zull.test.dubbo.constants.DubboVersion;
 import cn.zull.test.dubbo.constants.ErrorCode;
+import cn.zull.test.dubbo.provider.exception.CustomException;
+import cn.zull.test.dubbo.provider.exception.DubboProviderException;
 import com.alibaba.dubbo.config.annotation.Service;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -23,9 +25,21 @@ public class ExceptionDemoServiceImpl implements ExceptionDemoService {
     }
 
     @Override
+    public String dubboProviderException() {
+        logger.info("DubboProviderException");
+        throw new DubboProviderException(ErrorCode.ASSERT.ILLEGAL_ARGUMENT);
+    }
+
+    @Override
     public String exception() throws Exception {
         logger.info("exception");
         throw new Exception("exception");
+    }
+
+    @Override
+    public String customException() {
+        logger.info("customException");
+        throw new CustomException("customException");
     }
 
     @Override

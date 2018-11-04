@@ -21,12 +21,17 @@ public class ProjectRuntimeException extends RuntimeException {
 
     protected final Logger logger = LoggerFactory.getLogger(getClass());
 
-    protected ProjectRuntimeException(String errMsg) {
+    public ProjectRuntimeException(ProjectRuntimeException cause) {
+        super(cause);
+        this.errCode = cause.getErrorCode();
+    }
+
+    public ProjectRuntimeException(String errMsg) {
         super(errMsg);
         errCode = ErrorCode.common.DEFAULT_EXCEPTION_CODE;
     }
 
-    protected ProjectRuntimeException(IMessage errCode) {
+    public ProjectRuntimeException(IMessage errCode) {
         super(errCode.getErrMsg());
         this.errCode = errCode;
     }
