@@ -16,6 +16,7 @@
         <module>log-test</module>
         <module>kafka-learning</module>
         <module>common-basis</module>
+        <module>design-pattern</module>
     </modules>
 
 
