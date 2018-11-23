@@ -1,0 +1,18 @@
+plugins {
+    id 'java'
+}
+
+// 全局扩展配置
+ext {
+    spring_boot_version = '2.0.5.RELEASE'
+    lombok_version = '1.18.2'
+
+}
+
+allprojects {
+    group 'cn.zull.practice'
+    version '1.0-SNAPSHOT'
+    sourceCompatibility = 1.8
+
+
+}
