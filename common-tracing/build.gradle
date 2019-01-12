@@ -1,0 +1,3 @@
+dependencies {
+    compile "cn.zull.tracing:tracing-core:${tracing_version}"
+}

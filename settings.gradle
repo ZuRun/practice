@@ -2,6 +2,13 @@ rootProject.name = 'practice'
 
 include 'common-basis'
 include 'common-mongo'
+include 'common-tracing'
+include 'common-dubbo'
 
 include 'practice-concurrency'
 include 'practice-mongo'
+
+include 'practice-dubbo'
+include 'practice-dubbo:practice-dubbo-api'
+include 'practice-dubbo:practice-dubbo-consumer'
+include 'practice-dubbo:practice-dubbo-provider'

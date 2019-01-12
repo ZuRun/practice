@@ -1,0 +1,15 @@
+plugins {
+    id 'java'
+}
+dependencies {
+    compile project(':common-basis')
+    // 全链路
+    compile project(':common-tracing')
+    compile "cn.zull.tracing:tracing-dubbo:${tracing_version}"
+    // dubbo序列化方式用kryo
+    compile "de.javakaffee:kryo-serializers:${kryo_version}"
+    // zk
+    compile "com.github.sgroschupf:zkclient:${zkclient_version}"
+    compile "org.apache.zookeeper:zookeeper:${zookeeper_version}"
+
+}
