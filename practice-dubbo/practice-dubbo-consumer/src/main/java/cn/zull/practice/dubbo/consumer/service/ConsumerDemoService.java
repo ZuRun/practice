@@ -1,4 +1,4 @@
-package cn.zull.test.dubbo.consumer.service;
+package cn.zull.practice.dubbo.consumer.service;
 
 import cn.zull.practice.dubbo.api.DemoService;
 import cn.zull.practice.dubbo.constants.DubboVersion;

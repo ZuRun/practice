@@ -1,6 +1,6 @@
-package cn.zull.test.dubbo.consumer.controller;
+package cn.zull.practice.dubbo.consumer.controller;
 
-import cn.zull.test.dubbo.consumer.service.ConsumerExceptionDemoService;
+import cn.zull.practice.dubbo.consumer.service.ConsumerExceptionDemoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;

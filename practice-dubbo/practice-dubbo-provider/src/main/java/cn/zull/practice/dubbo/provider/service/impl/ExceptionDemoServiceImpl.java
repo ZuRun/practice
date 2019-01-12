@@ -1,11 +1,11 @@
-package cn.zull.test.dubbo.provider.service.impl;
+package cn.zull.practice.dubbo.provider.service.impl;
 
 import cn.zull.practice.common.basis.exception.AssertException;
 import cn.zull.practice.dubbo.api.ExceptionDemoService;
 import cn.zull.practice.dubbo.constants.DubboVersion;
 import cn.zull.practice.dubbo.constants.ErrorCode;
-import cn.zull.test.dubbo.provider.exception.CustomException;
-import cn.zull.test.dubbo.provider.exception.DubboProviderException;
+import cn.zull.practice.dubbo.provider.exception.CustomException;
+import cn.zull.practice.dubbo.provider.exception.DubboProviderException;
 import com.alibaba.dubbo.config.annotation.Service;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

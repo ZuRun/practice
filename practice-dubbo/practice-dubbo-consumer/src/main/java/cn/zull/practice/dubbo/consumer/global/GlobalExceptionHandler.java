@@ -1,4 +1,4 @@
-package cn.zull.test.dubbo.consumer.global;
+package cn.zull.practice.dubbo.consumer.global;
 
 
 import cn.zull.practice.common.basis.constants.ErrorCode;

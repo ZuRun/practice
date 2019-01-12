@@ -1,4 +1,4 @@
-package cn.zull.test.dubbo.provider.exception;
+package cn.zull.practice.dubbo.provider.exception;
 
 /**
  * @author zurun

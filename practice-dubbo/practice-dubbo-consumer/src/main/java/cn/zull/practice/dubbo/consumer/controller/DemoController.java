@@ -1,6 +1,6 @@
-package cn.zull.test.dubbo.consumer.controller;
+package cn.zull.practice.dubbo.consumer.controller;
 
-import cn.zull.test.dubbo.consumer.service.ConsumerDemoService;
+import cn.zull.practice.dubbo.consumer.service.ConsumerDemoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;

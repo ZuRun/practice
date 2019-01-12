@@ -1,4 +1,4 @@
-package cn.zull.test.dubbo.provider.exception;
+package cn.zull.practice.dubbo.provider.exception;
 
 import cn.zull.practice.common.basis.constants.IMessage;
 import cn.zull.practice.common.basis.exception.BusinessException;
