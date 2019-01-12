@@ -45,7 +45,7 @@ public class Counter {
     private void safeCount() {
         for (; ; ) {
             int i = atomicInteger.get();
-            atomicInteger.
+//            atomicInteger.
             boolean isSuccess = atomicInteger.compareAndSet(i, ++i);
             if (isSuccess) {
                 break;

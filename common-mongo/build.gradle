@@ -1,0 +1,7 @@
+plugins {
+    id 'java'
+}
+
+dependencies {
+    compile "org.springframework.boot:spring-boot-starter-data-mongodb:${spring_boot_version}"
+}

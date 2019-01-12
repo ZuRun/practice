@@ -14,5 +14,70 @@ allprojects {
     version '1.0-SNAPSHOT'
     sourceCompatibility = 1.8
 
+    buildscript {
+        // 全局插件所用的仓库
+        repositories {
+            maven { url 'http://maven.aliyun.com/nexus/content/groups/public/' }
+            maven { url 'http://maven.aliyun.com/nexus/content/repositories/jcenter' }
+        }
 
+        // 全局插件依赖
+        dependencies {
+//            classpath "io.spring.gradle:dependency-management-plugin:${springIOVersion}"
+            classpath("org.springframework.boot:spring-boot-gradle-plugin:${spring_boot_version}")
+        }
+
+        // 配置全局默认插件
+        apply plugin: 'java'
+        apply plugin: 'idea'
+//        apply plugin: 'org.springframework.boot'
+//        apply plugin: 'io.spring.dependency-management'
+
+        // 配置源代码和生成目标的语言版本
+        sourceCompatibility = 1.8
+        targetCompatibility = 1.8
+    }
+
+    // 指定字符集
+    [compileJava, compileTestJava]*.options*.encoding = 'UTF-8'
+
+    // 依赖的更新与缓存
+//    configurations.all {
+//        resolutionStrategy.cacheChangingModulesFor 0, java.util.concurrent.TimeUnit.SECONDS
+//        resolutionStrategy.cacheDynamicVersionsFor 0, java.util.concurrent.TimeUnit.SECONDS
+//    }
+
+    // 全局依赖
+    dependencies {
+
+        compile("org.springframework.boot:spring-boot-starter-web:${spring_boot_version}")
+        compileOnly("org.projectlombok:lombok:${lombok_version}")
+        compile group: 'com.alibaba', name: 'fastjson', version: '1.2.47'
+    }
+
+    // 全局依赖所用的仓库
+    repositories {
+        // 使用本地仓库
+        mavenLocal()
+        maven { url 'http://maven.aliyun.com/nexus/content/groups/public/' }
+        maven { url 'http://maven.aliyun.com/nexus/content/repositories/jcenter' }
+    }
+
+    // 增加全局configurationName
+    configurations {
+    }
+
+    // 指定所使用的资源
+    sourceSets {
+        main {
+            resources {
+                srcDirs = ['src/main/resources/common', "src/main/resources/${getProperty('package.environment')}"]
+            }
+        }
+    }
+    // 排除依赖
+    configurations {
+//        all*.exclude(group: 'org.slf4j', module: 'slf4j-log4j12')
+//        all*.exclude(group: 'log4j', module: 'log4j')
+    }
 }
