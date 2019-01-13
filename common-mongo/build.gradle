@@ -3,5 +3,7 @@ plugins {
 }
 
 dependencies {
+    compile project(':common-basis')
+
     compile "org.springframework.boot:spring-boot-starter-data-mongodb:${spring_boot_version}"
 }

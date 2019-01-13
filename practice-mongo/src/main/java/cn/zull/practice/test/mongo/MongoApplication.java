@@ -32,8 +32,8 @@ public class MongoApplication implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        customer();
-        deviceCmd();
+
+
     }
 
     void deviceCmd() {
