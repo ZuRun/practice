@@ -4,6 +4,7 @@ include 'common-basis'
 include 'common-mongo'
 include 'common-tracing'
 include 'common-dubbo'
+include 'common-logback2kafka'
 
 include 'practice-concurrency'
 include 'practice-mongo'

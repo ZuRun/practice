@@ -1,0 +1,11 @@
+plugins {
+    id 'java'
+}
+
+dependencies {
+    compile project(':common-basis')
+
+    compile "com.github.danielwegener:logback-kafka-appender:0.1.0"
+    compile "net.logstash.logback:logstash-logback-encoder:4.11"
+
+}
