@@ -8,10 +8,10 @@ import lombok.Data;
  * @date 2018/3/11 12:51:57
  */
 @Data
-public abstract class BaseResult<T> {
+public abstract class BaseResult {
     private int code = 0;
     private String message;
-    private T data;
+    private Object data;
 
     @Override
     public String toString() {

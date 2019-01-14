@@ -5,14 +5,14 @@ package cn.zull.practice.common.basis.constants;
  * @author zurun
  * @date 2018/3/11 13:14:18
  */
-public class Result<T> extends BaseResult<T> {
+public class Result extends BaseResult {
 
 
     public Boolean isSuccess() {
         return 0 == getCode();
     }
 
-    public Result addResult(T t) {
+    public Result addResult(Object t) {
         this.setData(t);
         return this;
     }

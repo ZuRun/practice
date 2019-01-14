@@ -13,3 +13,6 @@ include 'practice-dubbo'
 include 'practice-dubbo:practice-dubbo-api'
 include 'practice-dubbo:practice-dubbo-consumer'
 include 'practice-dubbo:practice-dubbo-provider'
+
+include 'practice-performance-testing'
+include 'practice-performance-testing:performance-testing-empty'
