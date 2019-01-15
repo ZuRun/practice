@@ -2,15 +2,13 @@ plugins {
     id 'java'
 }
 dependencies {
-    compile project(':common-basis')
     compile project(':practice-performance-testing:performance-testing-dubbo-api')
-
 }
 
 // springboot原生打包方式,可运行jar包
 apply plugin: 'org.springframework.boot'
 jar {
     manifest {
-        attributes 'Main-Class': 'cn.zull.practice.performance.PerformanceEmptyApplication'
+        attributes 'Main-Class': 'cn.zull.practice.performance.PerformanceDubboConsumerApplication'
     }
 }

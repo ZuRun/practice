@@ -16,3 +16,6 @@ include 'practice-dubbo:practice-dubbo-provider'
 
 include 'practice-performance-testing'
 include 'practice-performance-testing:performance-testing-empty'
+include 'practice-performance-testing:performance-testing-dubbo-api'
+include 'practice-performance-testing:performance-testing-dubbo-consumer'
+include 'practice-performance-testing:performance-testing-dubbo-provider'

@@ -19,10 +19,17 @@ public class EmptyController {
     public Result empty() {
         return Result.ok();
     }
+
     @GetMapping("withLog")
     public Result emptyWithLog() {
-     log.info("[接受到请求]");
-     return Result.ok();
+        log.info("[接受到请求]");
+        return Result.ok();
+    }
+
+    @GetMapping("sleep")
+    public Result sleep() throws InterruptedException {
+        Thread.sleep(20L);
+        return Result.ok();
     }
 
     @GetMapping("withParam")
