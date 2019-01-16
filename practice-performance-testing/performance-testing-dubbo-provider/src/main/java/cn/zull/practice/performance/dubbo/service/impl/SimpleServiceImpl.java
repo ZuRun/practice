@@ -14,4 +14,31 @@ public class SimpleServiceImpl implements SimpleService {
     public int plus(int num1, int num2) {
         return num1 + num2;
     }
+    @Override
+    public int plusWithSleep20(int num1, int num2) {
+        try {
+            Thread.sleep(20);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        return num1 + num2;
+    }
+    @Override
+    public int plusWithSleep50(int num1, int num2) {
+        try {
+            Thread.sleep(20);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        return num1 + num2;
+    }
+    @Override
+    public int plusWithSleep100(int num1, int num2) {
+        try {
+            Thread.sleep(20);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        return num1 + num2;
+    }
 }
