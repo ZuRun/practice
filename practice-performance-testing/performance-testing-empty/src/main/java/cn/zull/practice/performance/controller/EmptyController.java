@@ -1,5 +1,7 @@
 package cn.zull.practice.performance.controller;
 
+import cn.zull.practice.common.basis.constants.AuthType;
+import cn.zull.practice.common.basis.constants.IflytekAuth;
 import cn.zull.practice.common.basis.constants.Result;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,6 +19,12 @@ import org.springframework.web.bind.annotation.RestController;
 public class EmptyController {
     @GetMapping("eeempty")
     public Result empty() {
+        return Result.ok();
+    }
+
+    @IflytekAuth(authType = AuthType.PERFORMANCE_TEST)
+    @GetMapping("auth")
+    public Result auth() {
         return Result.ok();
     }
 

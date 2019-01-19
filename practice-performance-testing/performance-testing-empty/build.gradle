@@ -4,7 +4,8 @@ plugins {
 dependencies {
     compile project(':common-basis')
     compile project(':practice-performance-testing:performance-testing-dubbo-api')
-
+// 切面
+    compile "org.springframework.boot:spring-boot-starter-aop:${spring_boot_version}"
 }
 
 // springboot原生打包方式,可运行jar包
