@@ -2,11 +2,12 @@ rootProject.name = 'practice'
 
 include 'common-basis'
 include 'common-mongo'
+include 'common-redisson'
 include 'common-tracing'
 include 'common-dubbo'
 include 'common-logback2kafka'
 
-include 'practice-concurrency'
+include 'practice-concurrent'
 include 'practice-mongo'
 
 include 'practice-dubbo'
@@ -14,8 +15,16 @@ include 'practice-dubbo:practice-dubbo-api'
 include 'practice-dubbo:practice-dubbo-consumer'
 include 'practice-dubbo:practice-dubbo-provider'
 
+//性能测试用
 include 'practice-performance-testing'
 include 'practice-performance-testing:performance-testing-empty'
 include 'practice-performance-testing:performance-testing-dubbo-api'
 include 'practice-performance-testing:performance-testing-dubbo-consumer'
 include 'practice-performance-testing:performance-testing-dubbo-provider'
+
+// 全链路测试用
+include 'practice-tracing'
+include 'practice-tracing:tracing-appender'
+include 'practice-tracing:tracing-appender-redis'
+include 'practice-tracing:tracing-provider'
+include 'practice-tracing:tracing-consumer'

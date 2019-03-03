@@ -1,0 +1,11 @@
+plugins {
+    id 'java'
+}
+
+dependencies {
+    compile project(':common-basis')
+    compile group: 'org.redisson', name: 'redisson-spring-boot-starter', version: '3.8.2'
+    compile group: 'io.netty', name: 'netty-all', version: '4.1.30.Final'
+    // 切面,主要用于分布式锁
+    compile "org.springframework.boot:spring-boot-starter-aop:${spring_boot_version}"
+}
