@@ -119,16 +119,15 @@ public class RedissonTemplateUtils implements RedisUtils<String, String, String>
     }
 
     @Override
-    public String lPop(String key, long timeout) throws InterruptedException {
-        return lPop(key, timeout, TimeUnit.MILLISECONDS);
+    public String bLPop(String key, long timeout) throws InterruptedException {
+        return bLPop(key, timeout, TimeUnit.MILLISECONDS);
     }
 
     @Override
-    public String lPop(String key, long timeout, TimeUnit unit) throws InterruptedException {
+    public String bLPop(String key, long timeout, TimeUnit unit) throws InterruptedException {
         RBlockingQueue<String> blockingQueue = redissonClient.getBlockingQueue(key);
         return blockingQueue.poll(timeout, unit);
     }
-
 
     @Override
     public boolean rPush(String key, String... value) {
@@ -139,6 +138,12 @@ public class RedissonTemplateUtils implements RedisUtils<String, String, String>
     public boolean rPush(String key, List<String> values) {
         RList<String> list = redissonClient.getList(key);
         return list.addAll(values);
+    }
+
+    @Override
+    public int llen(String key) {
+        RList<String> list = redissonClient.getList(key);
+        return list.size();
     }
 
 }

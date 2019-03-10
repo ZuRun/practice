@@ -20,7 +20,7 @@ import java.util.concurrent.*;
 @Component
 public class BaseAppender implements TraceAppend, CommandLineRunner {
     public static BlockingQueue<String> blockingQueue = new ArrayBlockingQueue<>(1000);
-    private int consumerPoolSize = 30;
+    private int consumerPoolSize = 3;
     private final String key = "p:tracing:log";
     @Autowired
     RedisUtils<String, String, String> redisUtils;
@@ -32,17 +32,19 @@ public class BaseAppender implements TraceAppend, CommandLineRunner {
                 StopWatch stopWatch = new StopWatch();
                 stopWatch.start();
                 for (int i = 0; i < 20; i++) {
-                    String uuid = blockingQueue.poll(20, TimeUnit.MILLISECONDS);
+                    String uuid = blockingQueue.poll(100, TimeUnit.MILLISECONDS);
                     if (uuid == null) {
-                        break;
+                        continue;
                     }
-                    System.out.println(uuid + ":" + blockingQueue.size());
+//                    log.info(uuid + ":" + blockingQueue.size());
                     list.add(uuid);
                 }
                 redisUtils.rPush(key, list);
+                log.info("[写redis] size:{} 耗时:{}", list.size(), stopWatch.getTotalTimeMillis());
+
                 list.clear();
+                Thread.sleep(10L);
                 stopWatch.stop();
-                log.info("[写redis] 耗时:{}", stopWatch.getTotalTimeMillis());
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
@@ -57,4 +59,5 @@ public class BaseAppender implements TraceAppend, CommandLineRunner {
             executorService.execute(consuemrRunnable);
         }
     }
+
 }

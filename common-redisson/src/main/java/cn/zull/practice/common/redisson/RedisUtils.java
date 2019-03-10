@@ -128,11 +128,19 @@ public interface RedisUtils<V, HK, HV> {
      * @return
      * @throws InterruptedException
      */
-    String lPop(String key, long timeout) throws InterruptedException;
+    String bLPop(String key, long timeout) throws InterruptedException;
 
-    String lPop(String key, long timeout, TimeUnit unit) throws InterruptedException;
+    String bLPop(String key, long timeout, TimeUnit unit) throws InterruptedException;
 
     boolean rPush(String key, String... value);
 
     boolean rPush(String key, List<String> values);
+
+    /**
+     * list长度
+     *
+     * @param key
+     * @return
+     */
+    int llen(String key);
 }
