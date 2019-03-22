@@ -6,6 +6,7 @@ include 'common-redisson'
 include 'common-tracing'
 include 'common-dubbo'
 include 'common-logback2kafka'
+include 'common-elasticsearch'
 
 include 'practice-concurrent'
 include 'practice-mongo'
