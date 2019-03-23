@@ -132,6 +132,8 @@ public interface RedisUtils<V, HK, HV> {
 
     String bLPop(String key, long timeout, TimeUnit unit) throws InterruptedException;
 
+    List<String> matchBlPop(String key, int length);
+
     boolean rPush(String key, String... value);
 
     boolean rPush(String key, List<String> values);

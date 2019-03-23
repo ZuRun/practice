@@ -17,7 +17,7 @@ import java.util.concurrent.TimeUnit;
  * @date 2018/10/18 15:35:31
  */
 @Component(value = "redissonTemplateUtils")
-public class RedissonTemplateUtils implements RedisUtils<String, String, String> {
+public class RedissonUtils implements RedisUtils<String, String, String> {
     @Autowired
     @Qualifier("myRedissonClient")
     RedissonClient redissonClient;
@@ -128,6 +128,10 @@ public class RedissonTemplateUtils implements RedisUtils<String, String, String>
         RBlockingQueue<String> blockingQueue = redissonClient.getBlockingQueue(key);
         return blockingQueue.poll(timeout, unit);
     }
+    @Override
+    public List<String> matchBlPop(String key, int length) {
+
+    }
 
     @Override
     public boolean rPush(String key, String... value) {
@@ -139,6 +143,7 @@ public class RedissonTemplateUtils implements RedisUtils<String, String, String>
         RList<String> list = redissonClient.getList(key);
         return list.addAll(values);
     }
+
 
     @Override
     public int llen(String key) {

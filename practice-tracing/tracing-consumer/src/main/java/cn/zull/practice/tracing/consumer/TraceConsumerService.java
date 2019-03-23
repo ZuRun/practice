@@ -1,8 +1,8 @@
 package cn.zull.practice.tracing.consumer;
 
 import cn.zull.practice.common.redisson.RedisUtils;
+import cn.zull.practice.tracing.service.TraceUpload2EsService;
 import lombok.extern.slf4j.Slf4j;
-import org.redisson.client.RedisConnectionClosedException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
@@ -27,11 +27,13 @@ import java.util.concurrent.Executors;
 public class TraceConsumerService
         implements CommandLineRunner
 {
-    private final int consumerPoolSize = 3;
-    //    private final int consumerPoolSize = 50;
+//    private final int consumerPoolSize = 3;
+        private final int consumerPoolSize = 10;
     private final String key = "p:tracing:log";
     @Autowired
     RedisUtils<String, String, String> redisUtils;
+    @Autowired
+    TraceUpload2EsService upload2EsService;
 
     //    @Override
     public void run(String... args) {
@@ -66,19 +68,17 @@ public class TraceConsumerService
             try {
                 StopWatch stopWatch = new StopWatch();
                 stopWatch.start();
-                String uuid = redisUtils.bLPop(key, 50);
+                String traceInfo = redisUtils.bLPop(key, 50);
                 stopWatch.stop();
                 size++;
                 long now = System.currentTimeMillis();
                 if (now - startTime > 10000) {
 //                    bl = false;
                 }
+                upload2EsService.upload(traceInfo);
 //                log.info("[读redis] uuid:{} 耗时:{}", uuid, stopWatch.getTotalTimeMillis());
             } catch (InterruptedException e) {
                 log.warn("[消费线程InterruptedException]");
-                Thread.currentThread().interrupt();
-            } catch (RedisConnectionClosedException e) {
-                log.warn("[redis连接断开]");
                 Thread.currentThread().interrupt();
             }
         }

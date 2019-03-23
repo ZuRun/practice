@@ -26,18 +26,18 @@ public class BaseAppender implements TraceAppend, CommandLineRunner {
     RedisUtils<String, String, String> redisUtils;
 
     private Runnable consuemrRunnable = () -> {
-        List list = new ArrayList(20);
+        List<String> list = new ArrayList(20);
         while (true) {
             try {
                 StopWatch stopWatch = new StopWatch();
                 stopWatch.start();
                 for (int i = 0; i < 20; i++) {
-                    String uuid = blockingQueue.poll(100, TimeUnit.MILLISECONDS);
-                    if (uuid == null) {
+                    String data = blockingQueue.poll(100, TimeUnit.MILLISECONDS);
+                    if (data == null) {
                         continue;
                     }
 //                    log.info(uuid + ":" + blockingQueue.size());
-                    list.add(uuid);
+                    list.add(data);
                 }
                 redisUtils.rPush(key, list);
                 log.info("[写redis] size:{} 耗时:{}", list.size(), stopWatch.getTotalTimeMillis());

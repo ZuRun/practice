@@ -3,4 +3,5 @@ plugins {
 }
 dependencies {
     compile project(':practice-tracing:tracing-appender-redis')
+    compile project(':common-elasticsearch')
 }
