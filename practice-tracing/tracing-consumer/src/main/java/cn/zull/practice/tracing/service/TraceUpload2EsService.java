@@ -2,10 +2,14 @@ package cn.zull.practice.tracing.service;
 
 import com.alibaba.fastjson.JSONObject;
 import lombok.extern.slf4j.Slf4j;
+import org.elasticsearch.action.bulk.BulkRequestBuilder;
+import org.elasticsearch.action.bulk.BulkResponse;
 import org.elasticsearch.action.index.IndexResponse;
 import org.elasticsearch.client.transport.TransportClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 /**
  * @author zurun
@@ -26,11 +30,14 @@ public class TraceUpload2EsService {
 //        log.info("[写入es] id:{}", id);
     }
 
-    public void batchExecute() {
-//        BulkRequestBuilder bulkRequest = transportClient.prepareBulk();
-//        bulkRequest.add(transportClient.prepareIndex(indexName, type).setSource(source);
-//        bulkRequest.add(transportClient.prepareIndex(indexName, type).setSource(source);
-//        BulkResponse bulkResponse = bulkRequest.execute().actionGet();
+    public void batchExecute(List<String> traceInfos) {
+        BulkRequestBuilder bulkRequest = transportClient.prepareBulk();
+        traceInfos.forEach(traceInfo -> {
+            JSONObject json = JSONObject.parseObject(traceInfo);
+            bulkRequest.add(transportClient.prepareIndex(indexName, type).setSource(json));
+        });
+        BulkResponse bulkResponse = bulkRequest.execute().actionGet();
+//        BulkItemResponse[] items = bulkResponse.getItems();
 //        log.info("[批量写入es] bulkResponse:{}", JSONObject.toJSONString(bulkResponse));
     }
 }

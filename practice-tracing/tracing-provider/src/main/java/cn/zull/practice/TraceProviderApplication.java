@@ -31,7 +31,7 @@ public class TraceProviderApplication {
     private Runnable providerRunnable = () -> {
         while (true) {
             try {
-                Thread.sleep(2);
+                Thread.sleep(1);
                 long now = System.currentTimeMillis();
                 JSONObject json = new JSONObject();
                 json.put("traceId", UUID.randomUUID().toString());

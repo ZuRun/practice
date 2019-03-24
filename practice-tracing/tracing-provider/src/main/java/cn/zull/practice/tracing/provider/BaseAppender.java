@@ -20,7 +20,7 @@ import java.util.concurrent.*;
 @Component
 public class BaseAppender implements TraceAppend, CommandLineRunner {
     public static BlockingQueue<String> blockingQueue = new ArrayBlockingQueue<>(1000);
-    private int consumerPoolSize = 3;
+    private int consumerPoolSize = 10;
     private final String key = "p:tracing:log";
     @Autowired
     RedisUtils<String, String, String> redisUtils;

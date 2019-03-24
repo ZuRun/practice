@@ -75,7 +75,7 @@ public class TraceConsumerService
                 if (now - startTime > 10000) {
 //                    bl = false;
                 }
-//                upload2EsService.upload(traceInfo);
+                upload2EsService.batchExecute(traceInfos);
 //                log.info("[读redis] uuid:{} 耗时:{}", uuid, stopWatch.getTotalTimeMillis());
                 if (traceInfos.size() == 0) {
                     Thread.sleep(1L);
