@@ -6,10 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -25,6 +22,11 @@ public class RedissonUtils implements RedisUtils<String, String, String> {
     @Override
     public boolean expire(String key, long expirationTime, TimeUnit unit) {
         return redissonClient.getBucket(key).expire(expirationTime, unit);
+    }
+
+    @Override
+    public long pttl(String key) {
+        return redissonClient.getBucket(key).remainTimeToLive();
     }
 
     @Override
@@ -45,13 +47,13 @@ public class RedissonUtils implements RedisUtils<String, String, String> {
     }
 
     @Override
-    public Boolean setNx(String key, String value) {
+    public boolean setNx(String key, String value) {
         RBucket<String> rBucket = redissonClient.getBucket(key);
         return rBucket.trySet(value);
     }
 
     @Override
-    public Boolean setNx(String key, String value, long expirationTime, TimeUnit unit) {
+    public boolean setNx(String key, String value, long expirationTime, TimeUnit unit) {
         RBucket<String> rBucket = redissonClient.getBucket(key);
         return rBucket.trySet(value, expirationTime, unit);
     }
@@ -85,6 +87,14 @@ public class RedissonUtils implements RedisUtils<String, String, String> {
     public void hSet(String key, Map<String, String> map) {
         RMap<String, String> rMap = redissonClient.getMap(key);
         rMap.putAll(map);
+    }
+
+    @Override
+    public void hSet(String key, Map<String, String> map, long expirationTime, TimeUnit unit) {
+        RBatch batch = redissonClient.createBatch();
+        batch.getMap(key).putAllAsync(map);
+        batch.getBucket(key).expireAsync(expirationTime, unit);
+        batch.execute();
     }
 
     @Override
@@ -128,9 +138,12 @@ public class RedissonUtils implements RedisUtils<String, String, String> {
         RBlockingQueue<String> blockingQueue = redissonClient.getBlockingQueue(key);
         return blockingQueue.poll(timeout, unit);
     }
-    @Override
-    public List<String> matchBlPop(String key, int length) {
 
+    @Override
+    public List<String> matchLPop(String key, int length) {
+        final String script = "local l if tonumber(ARGV[1])<=0 then l='1' else l=ARGV[1] end local list=redis.call('lrange',KEYS[1],'0',l-1) redis.call('ltrim',KEYS[1],l,'-1') return list";
+        List<String> list = redissonClient.getScript().eval(RScript.Mode.READ_WRITE, script, RScript.ReturnType.MULTI, Collections.singletonList(key), length);
+        return list;
     }
 
     @Override

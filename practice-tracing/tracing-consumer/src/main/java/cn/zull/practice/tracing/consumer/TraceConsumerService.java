@@ -8,6 +8,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StopWatch;
 
+import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -25,10 +26,9 @@ import java.util.concurrent.Executors;
 @Slf4j
 @Component
 public class TraceConsumerService
-        implements CommandLineRunner
-{
-//    private final int consumerPoolSize = 3;
-        private final int consumerPoolSize = 10;
+        implements CommandLineRunner {
+    //    private final int consumerPoolSize = 3;
+    private final int consumerPoolSize = 10;
     private final String key = "p:tracing:log";
     @Autowired
     RedisUtils<String, String, String> redisUtils;
@@ -68,15 +68,18 @@ public class TraceConsumerService
             try {
                 StopWatch stopWatch = new StopWatch();
                 stopWatch.start();
-                String traceInfo = redisUtils.bLPop(key, 50);
+                List<String> traceInfos = redisUtils.matchLPop(key, 10);
                 stopWatch.stop();
-                size++;
+                size += traceInfos.size();
                 long now = System.currentTimeMillis();
                 if (now - startTime > 10000) {
 //                    bl = false;
                 }
-                upload2EsService.upload(traceInfo);
+//                upload2EsService.upload(traceInfo);
 //                log.info("[读redis] uuid:{} 耗时:{}", uuid, stopWatch.getTotalTimeMillis());
+                if (traceInfos.size() == 0) {
+                    Thread.sleep(1L);
+                }
             } catch (InterruptedException e) {
                 log.warn("[消费线程InterruptedException]");
                 Thread.currentThread().interrupt();

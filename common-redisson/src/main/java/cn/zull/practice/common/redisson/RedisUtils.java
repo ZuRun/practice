@@ -11,6 +11,16 @@ import java.util.concurrent.TimeUnit;
 public interface RedisUtils<V, HK, HV> {
     boolean expire(String key, long expirationTime, TimeUnit unit);
 
+    /**
+     * 查看key剩余的过期时间
+     *
+     * @param key
+     * @return time in milliseconds
+     * -2 if the key does not exist.
+     * -1 if the key exists but has no associated expire.
+     */
+    long pttl(String key);
+
     V get(String key);
 
     void set(String key, V value);
@@ -31,9 +41,9 @@ public interface RedisUtils<V, HK, HV> {
      * @return {@code true} 之前不存在, or {@code false} 缓存中已存在
      * @see <a href="http://redis.io/commands/setnx">Redis Documentation: SETNX</a>
      */
-    Boolean setNx(String key, V value);
+    boolean setNx(String key, V value);
 
-    Boolean setNx(String key, V value, long expirationTime, TimeUnit unit);
+    boolean setNx(String key, V value, long expirationTime, TimeUnit unit);
 
 
     /**
@@ -75,6 +85,8 @@ public interface RedisUtils<V, HK, HV> {
     void hSet(String key, HK hKey, HV hValue);
 
     void hSet(String key, Map<String, String> map);
+
+    void hSet(String key, Map<String, String> map, long expirationTime, TimeUnit unit);
 
     /**
      * 是否包含key
@@ -121,7 +133,7 @@ public interface RedisUtils<V, HK, HV> {
     boolean sRem(String key, String member);
 
     /**
-     * 目前只支持每次pop一个数据,需要多个的话,考虑用脚本来做
+     * 目前只支持每次pop一个数据,需要多个的话,参考 {@link #matchLPop}
      *
      * @param key
      * @param timeout
@@ -132,7 +144,25 @@ public interface RedisUtils<V, HK, HV> {
 
     String bLPop(String key, long timeout, TimeUnit unit) throws InterruptedException;
 
-    List<String> matchBlPop(String key, int length);
+    /**
+     * lPop多个数据,此方法为从head开始pop
+     * 两个命令拼接:lrange+ltrip,为保证原子性,需要使用lua脚本
+     * 此方法返回值不为空,无结果的话,会返回空集合
+     * <p>
+     * 注意:此方法非阻塞
+     * <p>
+     * -- l字段为:需要lRange的长度
+     * local l
+     * if tonumber(ARGV[1])<=0 then l='1' else l=ARGV[1] end
+     * local list=redis.call('lrange',KEYS[1],'0',l-1)
+     * redis.call('ltrim',KEYS[1],l,'-1')
+     * return list
+     *
+     * @param key
+     * @param length 一次lpop的数量
+     * @return
+     */
+    List<String> matchLPop(String key, int length);
 
     boolean rPush(String key, String... value);
 
