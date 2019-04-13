@@ -40,6 +40,7 @@ public class AuthAspect {
         Method method = targetClass.getMethod(methodName, parameterTypes);
         AuthType authType = method.getAnnotation(IflytekAuth.class).authType();
 
+        log.info("[auth] appid:{} authType:{}", appid, authType);
         return pjp.proceed();
     }
 }
