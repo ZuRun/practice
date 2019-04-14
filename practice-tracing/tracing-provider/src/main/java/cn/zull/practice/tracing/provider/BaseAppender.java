@@ -25,7 +25,7 @@ public class BaseAppender implements TraceAppend, CommandLineRunner {
     @Autowired
     RedisUtils<String, String, String> redisUtils;
 
-    private Runnable consuemrRunnable = () -> {
+    private Runnable consumerRunnable = () -> {
         List<String> list = new ArrayList(20);
         while (true) {
             try {
@@ -56,7 +56,7 @@ public class BaseAppender implements TraceAppend, CommandLineRunner {
     public void run(String... args) throws Exception {
         ExecutorService executorService = Executors.newFixedThreadPool(consumerPoolSize);
         for (int i = 0; i < consumerPoolSize; i++) {
-            executorService.execute(consuemrRunnable);
+            executorService.execute(consumerRunnable);
         }
     }
 
