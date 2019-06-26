@@ -29,3 +29,7 @@ include 'practice-tracing:tracing-appender'
 include 'practice-tracing:tracing-appender-redis'
 include 'practice-tracing:tracing-provider'
 include 'practice-tracing:tracing-consumer'
+
+// 限流
+include 'practice-current-limiting'
+include 'practice-current-limiting:practice-current-limiting-server'
