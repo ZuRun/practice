@@ -24,7 +24,9 @@ public class JvmController {
     public JSONObject test() throws InterruptedException {
 //        log.info("[t]");
         Thread.sleep(5);
-        return jvmService.test();
+        JSONObject json = jvmService.test();
+        json.put("a", "fk");
+        return json;
     }
 
 }
