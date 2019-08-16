@@ -1,0 +1,9 @@
+plugins {
+    id 'java'
+}
+
+dependencies {
+    compile project(':common-basis')
+
+    compile group: 'org.apache.zookeeper', name: 'zookeeper', version: '3.5.5'
+}
