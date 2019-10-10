@@ -9,6 +9,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  */
 @SpringBootApplication
 public class PerformanceEmptyApplication {
+
     public static void main(String[] args) {
         SpringApplication.run(PerformanceEmptyApplication.class, args);
     }

@@ -4,10 +4,7 @@ import cn.zull.practice.common.basis.constants.AuthType;
 import cn.zull.practice.common.basis.constants.IflytekAuth;
 import cn.zull.practice.common.basis.constants.Result;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * @author zurun
@@ -34,9 +31,14 @@ public class EmptyController {
         return Result.ok();
     }
 
-    @GetMapping("sleep")
-    public Result sleep() throws InterruptedException {
-        Thread.sleep(20L);
+    @GetMapping("sleep/{time}")
+    public Result sleep(@PathVariable Integer time) throws InterruptedException {
+        Thread.sleep(time);
+        return Result.ok();
+    }
+
+    @GetMapping("post")
+    public Result post(@RequestBody String body) {
         return Result.ok();
     }
 
