@@ -34,3 +34,7 @@ include 'practice-tracing:tracing-consumer'
 // 限流
 include 'practice-current-limiting'
 include 'practice-current-limiting:practice-current-limiting-server'
+
+// mysql
+include 'practice-mysql'
+include 'practice-mysql:practice-mysql-a'

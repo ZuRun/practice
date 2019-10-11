@@ -19,9 +19,14 @@ public class RandomUtils {
         return RANDOM.nextInt(max);
     }
 
+
+    public static int getRangeNum(int min, int max) {
+        return new Random().nextInt(max - min + 1) + min;
+    }
+
     public static void main(String[] args) {
         for (int i = 0; i < 100; i++) {
-            System.out.println(randomNumber(2));
+            System.out.println(getRangeNum(1,20));
         }
     }
 }

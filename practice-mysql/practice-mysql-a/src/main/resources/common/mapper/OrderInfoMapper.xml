@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.zull.practice.mysql.a.mapper.OrderInfoMapper">
+
+    <insert id="insert" useGeneratedKeys="true" keyProperty="orderId" parameterType="cn.zull.practice.mysql.a.entity.OrderInfo">
+        insert into t_order_info (
+          `order_number`, `buyer_id`, `order_status`, `order_amount`, `create_time`
+        ) values (
+          #{orderNumber},#{buyerId},#{orderStatus},#{orderAmount},#{createTime}
+        )
+    </insert>
+</mapper>
