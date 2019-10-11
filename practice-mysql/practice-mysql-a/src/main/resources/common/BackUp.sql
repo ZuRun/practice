@@ -13,7 +13,8 @@ CREATE TABLE `t_buyer_info` (
   `state`         tinyint(1)    NOT NULL  DEFAULT '1' COMMENT '状态 1 生效 0 删除',
   `sex`       tinyint(1)   NOT NULL  DEFAULT '2' COMMENT '性别 1男 0女 2未知',
   `register_time`       datetime  DEFAULT NULL COMMENT '注册日期',
-  PRIMARY KEY (`buyer_id`)
+  PRIMARY KEY (`buyer_id`),
+  UNIQUE KEY `t_buyer_info_unique_name` (`name`)
 )ENGINE = INNODB COMMENT ='用户表';
 
 CREATE TABLE `t_order_info` (
@@ -24,7 +25,8 @@ CREATE TABLE `t_order_info` (
   `order_amount`       decimal(12,2)   NOT NULL          COMMENT '订单金额',
   `create_time`       datetime  DEFAULT NULL COMMENT '订单创建日期',
   PRIMARY KEY (`order_id`),
-  UNIQUE KEY `t_order_info_unique_order_number` (`order_number`)
+  UNIQUE KEY `t_order_info_unique_order_number` (`order_number`),
+  KEY `t_order_info_index_buyer_id` (`buyer_id`)
 )ENGINE = INNODB COMMENT ='订单表';
 
 CREATE TABLE `t_order_item` (
