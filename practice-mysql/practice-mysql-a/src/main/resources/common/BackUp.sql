@@ -37,5 +37,6 @@ CREATE TABLE `t_order_item` (
   `goods_number`       decimal(12,2)   NOT NULL          COMMENT '商品数量',
   `goods_price`        decimal(12,2)   NOT NULL          COMMENT '商品单价',
   `goods_amount`       decimal(12,2)   NOT NULL          COMMENT '单项总金额',
-  PRIMARY KEY (`item_id`)
+  PRIMARY KEY (`item_id`),
+  KEY `t_order_item_index_order_id` (`order_id`)
 )ENGINE = INNODB COMMENT ='订单详情表';
