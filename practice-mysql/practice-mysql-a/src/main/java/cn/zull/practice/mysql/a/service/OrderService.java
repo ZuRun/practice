@@ -74,9 +74,12 @@ public class OrderService {
         });
     }
 
-    public void batchInsert() {
-        for (int i = 0; i < 50_0000; i++) {
-            bizExecutor.execute(()->{
+    public void batchInsert(int number) {
+        if (number > 500_0000) {
+            number = 500_0000;
+        }
+        for (int i = 0; i < number; i++) {
+            bizExecutor.execute(() -> {
                 insert();
             }, BizThreadType.ORDER_BATCH_INSERT);
         }

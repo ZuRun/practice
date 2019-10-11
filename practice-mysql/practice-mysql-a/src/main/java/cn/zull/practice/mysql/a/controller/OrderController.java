@@ -3,6 +3,7 @@ package cn.zull.practice.mysql.a.controller;
 import cn.zull.practice.common.basis.constants.Result;
 import cn.zull.practice.mysql.a.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -23,9 +24,9 @@ public class OrderController {
         return Result.ok();
     }
 
-    @RequestMapping("insert/batch")
-    public Result batchInsert() {
-        orderService.batchInsert();
+    @RequestMapping("insert/batch/{number}")
+    public Result batchInsert(@PathVariable Integer number) {
+        orderService.batchInsert(number);
         return Result.ok();
     }
 }
