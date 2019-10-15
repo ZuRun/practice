@@ -19,6 +19,7 @@ include 'practice-dubbo:practice-dubbo-provider'
 
 //性能测试用
 include 'practice-performance-testing'
+include 'practice-performance-testing:performance-testing-redis'
 include 'practice-performance-testing:performance-testing-empty'
 include 'practice-performance-testing:performance-testing-dubbo-api'
 include 'practice-performance-testing:performance-testing-dubbo-consumer'
