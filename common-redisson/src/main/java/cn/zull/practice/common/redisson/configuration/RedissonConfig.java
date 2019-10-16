@@ -10,6 +10,7 @@ import org.redisson.config.Config;
 import org.redisson.config.SingleServerConfig;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.util.StringUtils;
@@ -22,6 +23,7 @@ import java.util.List;
  */
 @Configuration
 @PropertySource("classpath:redis.properties")
+@ComponentScan(basePackages = {"cn.zull.practice.common.redisson"})
 @Getter
 public class RedissonConfig {
     @Value("${spring.redis.host}")
