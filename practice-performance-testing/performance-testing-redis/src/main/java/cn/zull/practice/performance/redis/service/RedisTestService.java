@@ -5,13 +5,14 @@ import cn.zull.practice.common.basis.utils.UUIDUtils;
 import cn.zull.practice.common.redisson.RedisUtils;
 import cn.zull.practice.performance.redis.constants.RedisConstants;
 import cn.zull.practice.performance.redis.dto.RedisTpsRespDTO;
-import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StopWatch;
+import sun.jvm.hotspot.utilities.BitMap;
 
 import java.util.ArrayList;
+import java.util.BitSet;
 import java.util.List;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
@@ -70,7 +71,10 @@ public class RedisTestService {
     public RedisTpsRespDTO batchRead(int threadSize, int cycleNum) {
         return batch(threadSize, cycleNum, (num) -> {
             String key = prefix + UUIDUtils.simpleUUID() + ":" + num;
+            long startTime = System.nanoTime();
             redisUtils.get(key);
+            long endTime = System.nanoTime();
+            System.out.println(endTime - startTime);
         });
     }
 
@@ -83,4 +87,26 @@ public class RedisTestService {
     }
 
 
+    public static void main(String[] args) {
+        BitMap bitMap = new BitMap(121);
+        bitMap.atPut(1, true);
+        bitMap.atPut(1, false);
+        bitMap.atPut(100, true);
+        bitMap.atPut(101, true);
+        System.out.println(bitMap.at(100));
+        System.out.println(bitMap.at(1));
+
+        System.out.println("----------");
+        BitSet bitSet = new BitSet(111);
+        bitSet.set(1);
+        bitSet.set(100);
+        System.out.println(bitSet.get(1));
+        System.out.println(bitSet.get(100));
+        System.out.println(bitSet);
+        System.out.println(bitSet.size());
+        System.out.println("----------");
+
+        System.out.println(1 << 6);
+        System.out.println(128 >> 6);
+    }
 }
