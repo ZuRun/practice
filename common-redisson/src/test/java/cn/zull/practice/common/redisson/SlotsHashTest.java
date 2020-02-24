@@ -2,7 +2,6 @@ package cn.zull.practice.common.redisson;
 
 import com.google.common.base.Stopwatch;
 import lombok.extern.slf4j.Slf4j;
-import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.nio.ByteBuffer;
@@ -21,10 +20,8 @@ public class SlotsHashTest {
     private static final int VIRTUAL_NODES = 2000;
     private final static String PREFIX = "##";
     private final TreeMap<Long, String> virtualNodes = new TreeMap<>();
+    private final Set<Long> slotHashCollections = new HashSet<>();
 
-    @Test
-    public void t() {
-    }
 
     public static void main(String[] args) throws InterruptedException {
         List<String> list = new ArrayList<>();
@@ -57,7 +54,6 @@ public class SlotsHashTest {
         System.out.println("--");
     }
 
-    private final Set<Long> slotHashCollections = new HashSet<>();
 
     public void addSlot(String slotName) {
         for (int i = 0; i < VIRTUAL_NODES; i++) {
