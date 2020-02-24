@@ -1,9 +1,9 @@
 package cn.zull.practice.common.redisson;
 
+import com.google.common.base.Stopwatch;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.util.StringUtils;
 
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
@@ -26,7 +26,7 @@ public class SlotsHashTest {
     public void t() {
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
         List<String> list = new ArrayList<>();
         Map<String, Integer> counter = new HashMap<>();
         list.add("s1");
@@ -48,8 +48,16 @@ public class SlotsHashTest {
         }
         System.out.println(counter);
 
+        Stopwatch sw = Stopwatch.createStarted();
+        for (int j = 0; j < 3000_0000; j++) {
+            test.findSlot("k:" + j);
+        }
+        sw.stop();
+        System.out.println(sw.toString());
+        System.out.println("--");
     }
 
+    private final Set<Long> slotHashCollections = new HashSet<>();
 
     public void addSlot(String slotName) {
         for (int i = 0; i < VIRTUAL_NODES; i++) {
@@ -59,14 +67,17 @@ public class SlotsHashTest {
                 throw new RuntimeException("pls check slot repetitive");
             }
             virtualNodes.put(hash, virtualNode);
+            slotHashCollections.add(hash);
         }
     }
 
     public String findSlot(String key) {
         long hash = hash(key);
-        String slotName = virtualNodes.get(hash);
+        final String slotName;
         // 如果hash值巧合已有，直接使用此key,否则使用小于此hash值的最近一个key
-        if (StringUtils.isEmpty(slotName)) {
+        if (slotHashCollections.contains(hash)) {
+            slotName = virtualNodes.get(hash);
+        } else {
             Map.Entry<Long, String> longStringEntry = virtualNodes.lowerEntry(hash);
             if (longStringEntry == null) {
                 // 碰巧是最小的hash值，取第一个
